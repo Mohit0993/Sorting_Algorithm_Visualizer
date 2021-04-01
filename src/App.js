@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
- 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-      </div>
-    );
-  }
+import SortingVisualizer from './component/SortingVisualizer/SortingVisualizer.jsx'
+
+function App() {
+  return (
+    <div className="App">
+      <SortingVisualizer/>
+    </div>
+  );
 }
+
 export default App;

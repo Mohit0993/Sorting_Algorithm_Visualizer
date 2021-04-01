@@ -29,7 +29,7 @@ class SortingVisualizer extends Component{
 
     resetArray(){
         const array=[];
-        for(let i=0;i<100; i++){
+        for(let i=0;i<NUMBER_OF_ARRAY_BARS; i++){
             array.push(randomIntFromIntervals(5,200));
         }
         this.setState({array});
@@ -63,11 +63,12 @@ class SortingVisualizer extends Component{
                 const [barOneIdx, newHeight] = animations[i];
                 const barOneStyle = arrayBars[barOneIdx].style;
                 barOneStyle.height = `${newHeight}px`;
+                this.state.array[barOneIdx]={newHeight};
               }, i * ANIMATION_SPEED_MS);
             }
           }
-
-
+          
+          console.log(arraysAreEqual(javaScriptSortedArray,this.state.array));
 
     }
     quickSort(){
@@ -84,12 +85,12 @@ class SortingVisualizer extends Component{
             <div classname="array-container">
                 <br/>
 <button onClick={()=> this.resetArray()}> Generate New Array </button>
-                <button onClick={()=> this.mergeSrt()}> Merege Sort</button>
+                <button onClick={()=> this.mergeSrt()}> Merge Sort</button>
                 <button onClick={()=> this.quickSort()}> Quick Sort</button>
                 <button onClick={()=> this.heapSort()}> Heap Sort </button>
                 <button onClick={()=> this.insertSort()}> Insertion Sort </button>
                 <button onClick={()=> this.heapSort()}> Bubble Sort </button>
-                <button onClick={()=> this.heapSort()}> Reset </button>
+                <button onClick={()=> this.resetArray()}> Reset </button>
 
 
 <br/>
