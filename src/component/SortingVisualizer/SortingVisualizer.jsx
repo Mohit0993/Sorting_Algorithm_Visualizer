@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import './SortingVisualizer.css';
-import * as sortingAlgorithum from '../SortingAlgo/sortmerge.js';
+import * as sortingAlgorithum from '../SortingAlgo/mergeSort.js';
 
 // Change this value for the speed of the animations.
 const ANIMATION_SPEED_MS = 1;
@@ -67,7 +67,7 @@ class SortingVisualizer extends Component{
               }, i * ANIMATION_SPEED_MS);
             }
           }
-          
+
           console.log(arraysAreEqual(javaScriptSortedArray,this.state.array));
 
     }
