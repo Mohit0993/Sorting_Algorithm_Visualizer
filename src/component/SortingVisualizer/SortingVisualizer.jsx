@@ -44,8 +44,6 @@ class SortingVisualizer extends Component{
        // console.log(sortedArray);
         //console.log(arraysAreEqual(javaScriptSortedArray,sortedArray));
 
-
-
         for (let i = 0; i < animations.length; i++) {
             const arrayBars = document.getElementsByClassName('array-bar');
             const isColorChange = i % 3 !== 2;
