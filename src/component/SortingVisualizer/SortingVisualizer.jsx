@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import './SortingVisualizer.css';
 import * as sortingAlgorithum from '../SortingAlgo/sortmerge.js';
+import {getQuickSortAnimations} from '../SortingAlgo/quickSort.js';
 
 // Change this value for the speed of the animations.
 const ANIMATION_SPEED_MS = 1;
