@@ -2,9 +2,11 @@ import React,{Component} from 'react';
 import './SortingVisualizer.css';
 import * as sortingAlgorithum from '../SortingAlgo/mergeSort.js';
 import * as sortingHeap from '../SortingAlgo/HeapSort.js';
+import {getQuickSortAnimations} from '../SortingAlgo/quickSort.js';
+
 
 // Change this value for the speed of the animations.
-const ANIMATION_SPEED_MS = 1;
+const ANIMATION_SPEED_MS = 10;
 
 // Change this value for the number of bars (value) in the array.
 const NUMBER_OF_ARRAY_BARS = 110;
@@ -97,6 +99,7 @@ class SortingVisualizer extends Component{
     heapSortAnimations(){
         const javaScriptSortedArray=this.state.array.slice()
         .sort((a,b)=>a-b);
+
 
         const animations=sortingHeap.heapSortAnimations(this.state.array);
 
