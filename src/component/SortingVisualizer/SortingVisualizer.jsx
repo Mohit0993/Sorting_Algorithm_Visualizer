@@ -1,7 +1,8 @@
 import React,{Component} from 'react';
 import './SortingVisualizer.css';
-import * as sortingAlgorithum from '../SortingAlgo/sortmerge.js';
+import * as sortingAlgorithum from '../SortingAlgo/mergeSort.js';
 import * as sortingHeap from '../SortingAlgo/heapSort.js';
+
 // Change this value for the speed of the animations.
 const ANIMATION_SPEED_MS = 1;
 
@@ -44,8 +45,6 @@ class SortingVisualizer extends Component{
         console.log('Merge Sort');
         //console.log(arraysAreEqual(javaScriptSortedArray,sortedArray));
 
-
-
         for (let i = 0; i < animations.length; i++) {
             const arrayBars = document.getElementsByClassName('array-bar');
             const isColorChange = i % 3 !== 2;
@@ -67,7 +66,7 @@ class SortingVisualizer extends Component{
               }, i * ANIMATION_SPEED_MS);
             }
           }
-          
+
           console.log(arraysAreEqual(javaScriptSortedArray,this.state.array));
 
     }
