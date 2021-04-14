@@ -70,8 +70,29 @@ class SortingVisualizer extends Component{
           console.log(arraysAreEqual(javaScriptSortedArray,this.state.array));
 
     }
-    quickSort(){
-
+    
+    quickSort() {
+    const animatingArray = getQuickSortAnimations(this.state.array);
+        for (let i = 0; i < animatingArray.length; i++) {
+            const arrayBars = document.getElementsByClassName('array-bar');
+            const colorChange = i % 4 <= 1;
+          if (colorChange) {
+            const [barOneIdx, barTwoIdx] = animatingArray[i];
+            const barOneStyle = arrayBars[barOneIdx].style;
+            const barTwoStyle = arrayBars[barTwoIdx].style;
+            const color = i % 4 === 0 ? SECONDARY_COLOR : PRIMARY_COLOR;
+            setTimeout(() => {
+              barOneStyle.backgroundColor = color;
+              barTwoStyle.backgroundColor = color;
+            }, i * ANIMATION_SPEED_MS);
+          } else {
+            setTimeout(() => {
+              const [barOneIdx, newHeight] = animatingArray[i];
+              const barOneStyle = arrayBars[barOneIdx].style;
+              barOneStyle.height = `${newHeight}px`;
+            }, i * ANIMATION_SPEED_MS);
+            }
+        }
     }
     heapSortAnimations(){
         const javaScriptSortedArray=this.state.array.slice()
@@ -81,10 +102,7 @@ class SortingVisualizer extends Component{
 
        // console.log(sortedArray);
         //console.log(arraysAreEqual(javaScriptSortedArray,sortedArray));
-
-
-
-        for (let i = 0; i < animations.length; i++) {
+         for (let i = 0; i < animations.length; i++) {
             const arrayBars = document.getElementsByClassName('array-bar');
             const isColorChange = i % 4 <= 1;
             if (isColorChange) {
