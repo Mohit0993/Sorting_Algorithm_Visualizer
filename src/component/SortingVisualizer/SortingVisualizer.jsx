@@ -4,6 +4,7 @@ import * as sortingAlgorithum from '../SortingAlgo/mergeSort.js';
 import * as sortingInsertion from '../SortingAlgo/insertionSort.js';
 import * as sortingHeap from '../SortingAlgo/HeapSort.js';
 import {getQuickSortAnimations} from '../SortingAlgo/quickSort.js';
+
 // Change this value for the speed of the animations.
 const ANIMATION_SPEED_MS = 10;
 
