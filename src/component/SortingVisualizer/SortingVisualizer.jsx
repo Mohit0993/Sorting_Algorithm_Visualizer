@@ -2,6 +2,8 @@ import React,{Component} from 'react';
 import './SortingVisualizer.css';
 import * as sortingAlgorithum from '../SortingAlgo/mergeSort.js';
 import * as sortingInsertion from '../SortingAlgo/insertionSort.js';
+import * as sortingHeap from '../SortingAlgo/HeapSort.js';
+import {getQuickSortAnimations} from '../SortingAlgo/quickSort.js';
 // Change this value for the speed of the animations.
 const ANIMATION_SPEED_MS = 10;
 
@@ -30,7 +32,7 @@ class SortingVisualizer extends Component{
     resetArray(){
         const array=[];
         for(let i=0;i<NUMBER_OF_ARRAY_BARS; i++){
-            array.push(randomIntFromIntervals(5,200));
+            array.push(randomIntFromIntervals(50,650));
         }
         this.setState({array});
     }
@@ -41,7 +43,7 @@ class SortingVisualizer extends Component{
 
         const animations=sortingAlgorithum.mergeSort(this.state.array);
 
-       // console.log(sortedArray);
+        console.log('Merge Sort');
         //console.log(arraysAreEqual(javaScriptSortedArray,sortedArray));
 
 
@@ -71,11 +73,62 @@ class SortingVisualizer extends Component{
           console.log(arraysAreEqual(javaScriptSortedArray,this.state.array));
 
     }
-    quickSort(){
 
+    quickSort() {
+    const animatingArray = getQuickSortAnimations(this.state.array);
+        for (let i = 0; i < animatingArray.length; i++) {
+            const arrayBars = document.getElementsByClassName('array-bar');
+            const colorChange = i % 4 <= 1;
+          if (colorChange) {
+            const [barOneIdx, barTwoIdx] = animatingArray[i];
+            const barOneStyle = arrayBars[barOneIdx].style;
+            const barTwoStyle = arrayBars[barTwoIdx].style;
+            const color = i % 4 === 0 ? SECONDARY_COLOR : PRIMARY_COLOR;
+            setTimeout(() => {
+              barOneStyle.backgroundColor = color;
+              barTwoStyle.backgroundColor = color;
+            }, i * ANIMATION_SPEED_MS);
+          } else {
+            setTimeout(() => {
+              const [barOneIdx, newHeight] = animatingArray[i];
+              const barOneStyle = arrayBars[barOneIdx].style;
+              barOneStyle.height = `${newHeight}px`;
+            }, i * ANIMATION_SPEED_MS);
+            }
+        }
     }
-    heapSort(){
+    heapSortAnimations(){
+        const javaScriptSortedArray=this.state.array.slice()
+        .sort((a,b)=>a-b);
 
+
+        const animations=sortingHeap.heapSortAnimations(this.state.array);
+
+       // console.log(sortedArray);
+        //console.log(arraysAreEqual(javaScriptSortedArray,sortedArray));
+         for (let i = 0; i < animations.length; i++) {
+            const arrayBars = document.getElementsByClassName('array-bar');
+            const isColorChange = i % 4 <= 1;
+            if (isColorChange) {
+              const [barOneIdx, barTwoIdx] = animations[i];
+              const barOneStyle = arrayBars[barOneIdx].style;
+              const barTwoStyle = arrayBars[barTwoIdx].style;
+              const color = i % 4 === 0 ? SECONDARY_COLOR : PRIMARY_COLOR;
+              setTimeout(() => {
+                barOneStyle.backgroundColor = color;
+                barTwoStyle.backgroundColor = color;
+              }, i * ANIMATION_SPEED_MS);
+            } else {
+              setTimeout(() => {
+                const [barOneIdx, newHeight] = animations[i];
+                const barOneStyle = arrayBars[barOneIdx].style;
+                barOneStyle.height = `${newHeight}px`;
+                this.state.array[barOneIdx]={newHeight};
+              }, i * ANIMATION_SPEED_MS);
+            }
+          }
+          console.log('heapSort');
+          console.log(arraysAreEqual(javaScriptSortedArray,this.state.array));
     }
     insertSort(){
       const javaScriptSortedArray=this.state.array.slice()
@@ -126,7 +179,7 @@ class SortingVisualizer extends Component{
 <button onClick={()=> this.resetArray()}> Generate New Array </button>
                 <button onClick={()=> this.mergeSrt()}> Merge Sort</button>
                 <button onClick={()=> this.quickSort()}> Quick Sort</button>
-                <button onClick={()=> this.heapSort()}> Heap Sort </button>
+                <button onClick={()=> this.heapSortAnimations()}> Heap Sort </button>
                 <button onClick={()=> this.insertSort()}> Insertion Sort </button>
                 <button onClick={()=> this.heapSort()}> Bubble Sort </button>
                 <button onClick={()=> this.resetArray()}> Reset </button>
