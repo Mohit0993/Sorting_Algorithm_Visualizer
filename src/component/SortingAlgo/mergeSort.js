@@ -17,6 +17,7 @@
     while(j<sechalf.length) sortedArray.push(sechalf[j++]);
     return sortedArray;
 };*/
+
 export function mergeSort(array) {
     const animations = [];
     if (array.length <= 1) return array;
@@ -24,7 +25,7 @@ export function mergeSort(array) {
     mergeSortHelper(array, 0, array.length - 1, auxiliaryArray, animations);
     return animations;
   }
-  
+
   function mergeSortHelper(
     mainArray,
     startIdx,
@@ -38,7 +39,7 @@ export function mergeSort(array) {
     mergeSortHelper(auxiliaryArray, middleIdx + 1, endIdx, mainArray, animations);
     doMerge(mainArray, startIdx, middleIdx, endIdx, auxiliaryArray, animations);
   }
-  
+
   function doMerge(
     mainArray,
     startIdx,

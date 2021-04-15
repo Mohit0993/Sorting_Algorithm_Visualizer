@@ -17,8 +17,6 @@ export const insertionSort = (inputArr) => {
 
 
 
-
-
 export function insertionSort(inputArr){
   const animations = [];
   insertionHelper(inputArr,animations);
@@ -26,6 +24,7 @@ export function insertionSort(inputArr){
 };
 //173 182 108 191 114 75 164 44 125 132
 function insertionHelper(array,animations){
+
 
   let length = array.length;
   for (let i = 1; i < length; i++) {

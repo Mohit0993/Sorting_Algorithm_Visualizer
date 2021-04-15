@@ -1,12 +1,12 @@
 import React,{Component} from 'react';
 import './SortingVisualizer.css';
 import * as sortingAlgorithum from '../SortingAlgo/mergeSort.js';
-
+import * as sortingInsertion from '../SortingAlgo/insertionSort.js';
 // Change this value for the speed of the animations.
-const ANIMATION_SPEED_MS = 1;
+const ANIMATION_SPEED_MS = 10;
 
 // Change this value for the number of bars (value) in the array.
-const NUMBER_OF_ARRAY_BARS = 100;
+const NUMBER_OF_ARRAY_BARS = 110;
 
 // This is the main color of the array bars.
 const PRIMARY_COLOR = 'turquoise';
@@ -44,6 +44,8 @@ class SortingVisualizer extends Component{
        // console.log(sortedArray);
         //console.log(arraysAreEqual(javaScriptSortedArray,sortedArray));
 
+
+
         for (let i = 0; i < animations.length; i++) {
             const arrayBars = document.getElementsByClassName('array-bar');
             const isColorChange = i % 3 !== 2;
@@ -75,7 +77,46 @@ class SortingVisualizer extends Component{
     heapSort(){
 
     }
+    insertSort(){
+      const javaScriptSortedArray=this.state.array.slice()
+      .sort((a,b)=>a-b);
 
+    //  const sortedArray=sortingInsertion.insertionSort(this.state.array);
+
+      const animations=sortingInsertion.insertionSort(this.state.array);
+
+     // console.log(sortedArray);
+      //console.log(arraysAreEqual(javaScriptSortedArray,sortedArray));
+
+
+
+      for (let i = 0; i < animations.length; i++) {
+          const arrayBars = document.getElementsByClassName('array-bar');
+          const isColorChange = i % 3 !== 2;
+          if (isColorChange) {
+            const [barOneIdx, barTwoIdx] = animations[i];
+            const barOneStyle = arrayBars[barOneIdx].style;
+            const barTwoStyle = arrayBars[barTwoIdx].style;
+            const color = i % 3 === 0 ? SECONDARY_COLOR : PRIMARY_COLOR;
+            setTimeout(() => {
+              barOneStyle.backgroundColor = color;
+              barTwoStyle.backgroundColor = color;
+            }, i * 100);
+          } else {
+            setTimeout(() => {
+              const [barOneIdx, newHeight] = animations[i];
+              const barOneStyle = arrayBars[barOneIdx].style;
+              barOneStyle.height = `${newHeight}px`;
+              this.state.array[barOneIdx]={newHeight};
+            }, i * 100);
+          }
+        }
+
+
+      console.log("insert");
+      this.state.array[0]=0;
+    console.log(arraysAreEqual(javaScriptSortedArray,this.state.array));
+    }
     render(){
         const {array}=this.state;
         return(
@@ -96,9 +137,7 @@ class SortingVisualizer extends Component{
 <br/>
 
             {array.map((value,idx)=>(
-            <div className="array-bar" key={idx} style={{height: `${value}px`}} >
-
-            </div>
+            <div className="array-bar" key={idx} style={{height: `${value}px`}}> </div>
 
                 ))}
                 <br/>
@@ -116,6 +155,7 @@ function randomIntFromIntervals(min,max){
     // min max included
     return Math.floor(Math.random()*(max-min+1)+min);
 }
+//unit test case function
 function arraysAreEqual(arrOne,arrTwo){
     if (arrOne.length!==arrTwo.length) return false;
     for (let i =0;i<arrTwo.length;i++){
