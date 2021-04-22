@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import './SortingVisualizer.css';
 import * as sortingAlgorithum from '../SortingAlgo/mergeSort.js';
 import * as sortingInsertion from '../SortingAlgo/insertionSort.js';
-import * as sortingHeap from '../SortingAlgo/HeapSort.js';
+import * as sortingHeap from '../SortingAlgo/heapSort.js';
 import {getQuickSortAnimations} from '../SortingAlgo/quickSort.js';
 
 // Change this value for the speed of the animations.
@@ -27,10 +27,14 @@ class SortingVisualizer extends Component{
     }
 
     componentDidMount(){
-        this.resetArray();
+        this.genrateArray();
     }
 
     resetArray(){
+       window.location.reload(false);
+      this.genrateArray();
+    }
+    genrateArray(){
         const array=[];
         for(let i=0;i<NUMBER_OF_ARRAY_BARS; i++){
             array.push(randomIntFromIntervals(50,650));
@@ -155,20 +159,20 @@ class SortingVisualizer extends Component{
             setTimeout(() => {
               barOneStyle.backgroundColor = color;
               barTwoStyle.backgroundColor = color;
-            }, i * 100);
+            }, i * ANIMATION_SPEED_MS);
           } else {
             setTimeout(() => {
               const [barOneIdx, newHeight] = animations[i];
               const barOneStyle = arrayBars[barOneIdx].style;
               barOneStyle.height = `${newHeight}px`;
               this.state.array[barOneIdx]={newHeight};
-            }, i * 100);
+            }, i * ANIMATION_SPEED_MS);
           }
         }
 
 
       console.log("insert");
-      this.state.array[0]=0;
+      //this.state.array[0]=0;
     console.log(arraysAreEqual(javaScriptSortedArray,this.state.array));
     }
     render(){
@@ -177,7 +181,7 @@ class SortingVisualizer extends Component{
 
             <div classname="array-container">
                 <br/>
-<button onClick={()=> this.resetArray()}> Generate New Array </button>
+<button onClick={()=> this.genrateArray()}> Generate New Array </button>
                 <button onClick={()=> this.mergeSrt()}> Merge Sort</button>
                 <button onClick={()=> this.quickSort()}> Quick Sort</button>
                 <button onClick={()=> this.heapSortAnimations()}> Heap Sort </button>
