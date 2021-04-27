@@ -4,6 +4,7 @@ import * as sortingAlgorithum from '../SortingAlgo/mergeSort.js';
 import * as sortingInsertion from '../SortingAlgo/insertionSort.js';
 import * as sortingHeap from '../SortingAlgo/heapSort.js';
 import {getQuickSortAnimations} from '../SortingAlgo/quickSort.js';
+import {bubbleSortAnimations} from '../SortingAlgo/bubbleSort.js';
 
 // Change this value for the speed of the animations.
 const ANIMATION_SPEED_MS = 10;
@@ -80,6 +81,9 @@ class SortingVisualizer extends Component{
     }
 
     quickSort() {
+      const javaScriptSortedArray=this.state.array.slice()
+        .sort((a,b)=>a-b);
+
     const animatingArray = getQuickSortAnimations(this.state.array);
         for (let i = 0; i < animatingArray.length; i++) {
             const arrayBars = document.getElementsByClassName('array-bar');
@@ -101,6 +105,9 @@ class SortingVisualizer extends Component{
             }, i * ANIMATION_SPEED_MS);
             }
         }
+
+        console.log('Quick Sort');
+          console.log(arraysAreEqual(javaScriptSortedArray,this.state.array));
     }
     heapSortAnimations(){
         const javaScriptSortedArray=this.state.array.slice()
@@ -132,7 +139,7 @@ class SortingVisualizer extends Component{
               }, i * ANIMATION_SPEED_MS);
             }
           }
-          console.log('heapSort');
+          console.log('Heap Sort');
           console.log(arraysAreEqual(javaScriptSortedArray,this.state.array));
     }
     insertSort(){
@@ -171,10 +178,43 @@ class SortingVisualizer extends Component{
         }
 
 
-      console.log("insert");
+      console.log('Insertion Sort');
       //this.state.array[0]=0;
     console.log(arraysAreEqual(javaScriptSortedArray,this.state.array));
     }
+
+    bubbleSort(){
+      const javaScriptSortedArray=this.state.array.slice()
+      .sort((a,b)=>a-b);
+
+
+      const animations = bubbleSortAnimations(this.state.array);
+
+       for (let i = 0; i < animations.length; i++) {
+          const arrayBars = document.getElementsByClassName('array-bar');
+          const isColorChange = i % 4 <= 1;
+          if (isColorChange) {
+            const [barOneIdx, barTwoIdx] = animations[i];
+            const barOneStyle = arrayBars[barOneIdx].style;
+            const barTwoStyle = arrayBars[barTwoIdx].style;
+            const color = i % 4 === 0 ? SECONDARY_COLOR : PRIMARY_COLOR;
+            setTimeout(() => {
+              barOneStyle.backgroundColor = color;
+              barTwoStyle.backgroundColor = color;
+            }, i * ANIMATION_SPEED_MS);
+          } else {
+            setTimeout(() => {
+              const [barOneIdx, newHeight] = animations[i];
+              const barOneStyle = arrayBars[barOneIdx].style;
+              barOneStyle.height = `${newHeight}px`;
+              this.state.array[barOneIdx]={newHeight};
+            }, i * ANIMATION_SPEED_MS);
+          }
+        }
+        console.log('Bubble Sort');
+        console.log(arraysAreEqual(javaScriptSortedArray,this.state.array));
+    }
+
     render(){
         const {array}=this.state;
         return(
@@ -186,7 +226,7 @@ class SortingVisualizer extends Component{
                 <button onClick={()=> this.quickSort()}> Quick Sort</button>
                 <button onClick={()=> this.heapSortAnimations()}> Heap Sort </button>
                 <button onClick={()=> this.insertSort()}> Insertion Sort </button>
-                <button onClick={()=> this.heapSort()}> Bubble Sort </button>
+                <button onClick={()=> this.bubbleSort()}> Bubble Sort </button>
                 <button onClick={()=> this.resetArray()}> Reset </button>
 
 
