@@ -1,10 +1,89 @@
 .array-container{
-    position: absolute;
+
     left:100px;
+    margin-bottom:0px;
+
 }
+.test{
+  height:600px;
+}
+
 .array-bar {
     width:8px;
     background-color: turquoise;
     display:inline-block;
     margin: 0 2px;
+}
+#toolbar {
+    width: 100%;
+    height: 100px;
+    background-color: #34495e;
+  }
+
+.array-bar {
+    width:8px;
+    background-color: turquoise;
+    display:inline-block;
+    margin: 0 2px;
+}
+
+#generateArray {
+    font-size: 16px;
+    font-family: monospace;
+    display: inline-block;
+    margin-left: 25px;
+    margin-right: 15px;
+  }
+
+  #generateArray:hover {
+    color: rgb(212, 212, 212) !important;
+  }
+
+.arraySize {
+    font-size: 16px;
+    font-family: monospace;
+    display: inline-block;
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+
+  #changeSize {
+    outline: none;
+    margin-right: 15px;
+  }
+.separator {
+  width: 5px;
+  height: 55px;
+  background-color: rgba(0, 0, 0, 0.8);
+  margin-left: 15px;
+  margin-right: 15px;
+  display: inline-block;
+}
+
+.rangeslider{
+    width: 50%;
+}
+.button{
+  padding-left: 2px;
+}
+.myslider {
+    -webkit-appearance: none;
+    background: #FCF3CF  ;
+    width: 50%;
+    height: 20px;
+    opacity: 2;
+   }
+
+
+.myslider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    cursor: pointer;
+    background: #34495E  ;
+    width: 5%;
+    height: 20px;
+}
+
+
+.myslider:hover {
+    opacity: 1;
 }

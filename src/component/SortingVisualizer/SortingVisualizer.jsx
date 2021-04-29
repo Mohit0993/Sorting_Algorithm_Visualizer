@@ -7,10 +7,10 @@ import {getQuickSortAnimations} from '../SortingAlgo/quickSort.js';
 import {bubbleSortAnimations} from '../SortingAlgo/bubbleSort.js';
 
 // Change this value for the speed of the animations.
-const ANIMATION_SPEED_MS = 10;
+var ANIMATION_SPEED_MS = 10;
 
 // Change this value for the number of bars (value) in the array.
-const NUMBER_OF_ARRAY_BARS = 110;
+var NUMBER_OF_ARRAY_BARS = 50;
 
 // This is the main color of the array bars.
 const PRIMARY_COLOR = 'turquoise';
@@ -21,7 +21,8 @@ const SECONDARY_COLOR = 'red';
 class SortingVisualizer extends Component{
     constructor(props){
         super(props);
-
+        this.handleChange = this.handleChange.bind(this);
+        this.handleChangeSpeed = this.handleChangeSpeed.bind(this);
         this.state={
             array:[],
         };
@@ -35,10 +36,30 @@ class SortingVisualizer extends Component{
        window.location.reload(false);
       this.genrateArray();
     }
+    handleChange(evt) {
+  //const { generateArray } = this.props;
+
+
+  //console.log(evt.target.value);
+  //NUMBER_OF_ARRAY_BARS=Math.floor((parseInt(evt.target.value) + 3) * 1.65);
+  NUMBER_OF_ARRAY_BARS=evt.target.value;
+  this.genrateArray();
+
+  }
+    handleChangeSpeed(evt) {
+  //const { generateArray } = this.props;
+
+
+  console.log("speed"+evt.target.value);
+  //NUMBER_OF_ARRAY_BARS=Math.floor((parseInt(evt.target.value) + 3) * 1.65);
+  ANIMATION_SPEED_MS=evt.target.value;
+
+
+}
     genrateArray(){
         const array=[];
         for(let i=0;i<NUMBER_OF_ARRAY_BARS; i++){
-            array.push(randomIntFromIntervals(50,650));
+            array.push(randomIntFromIntervals(90,550));
         }
         this.setState({array});
     }
@@ -220,9 +241,37 @@ class SortingVisualizer extends Component{
         return(
 
             <div classname="array-container">
+            <div
+              id="arraySize"
+              class="arraySize"
+              >
+            Array Size
+            </div>
+              <input
+                id="changeSize"
+                type="range"
+                min="10"
+                max="100"
+                onChange={this.handleChange}
+              />
+              <div
+                id="arraySize2"
+                class="arraySize"
+                >
+                Sorting Speed
+              </div>
+              <input
+                id="changeSpeed"
+                type="range"
+                min="5"
+                max="100"
+                onChange={this.handleChangeSpeed}
+              />
+
+                <br/>
                 <br/>
 <button onClick={()=> this.genrateArray()}> Generate New Array </button>
-                <button onClick={()=> this.mergeSrt()}> Merge Sort</button>
+                <button className="button" onClick={()=> this.mergeSrt()}> Merge Sort</button>
                 <button onClick={()=> this.quickSort()}> Quick Sort</button>
                 <button onClick={()=> this.heapSortAnimations()}> Heap Sort </button>
                 <button onClick={()=> this.insertSort()}> Insertion Sort </button>
@@ -233,11 +282,12 @@ class SortingVisualizer extends Component{
 <br/>
 <br/>
 <br/>
-
+<div className="test">
             {array.map((value,idx)=>(
             <div className="array-bar" key={idx} style={{height: `${value}px`}}> </div>
 
                 ))}
+                </div>
                 <br/>
 
 
