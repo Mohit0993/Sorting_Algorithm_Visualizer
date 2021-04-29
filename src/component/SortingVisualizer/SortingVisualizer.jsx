@@ -25,6 +25,7 @@ class SortingVisualizer extends Component{
         this.handleChangeSpeed = this.handleChangeSpeed.bind(this);
         this.state={
             array:[],
+
         };
     }
 
@@ -65,6 +66,7 @@ class SortingVisualizer extends Component{
     }
     mergeSrt(){
 
+
         const javaScriptSortedArray=this.state.array.slice()
         .sort((a,b)=>a-b);
 
@@ -72,7 +74,6 @@ class SortingVisualizer extends Component{
 
         console.log('Merge Sort');
         //console.log(arraysAreEqual(javaScriptSortedArray,sortedArray));
-
 
 
         for (let i = 0; i < animations.length; i++) {
@@ -238,9 +239,11 @@ class SortingVisualizer extends Component{
 
     render(){
         const {array}=this.state;
+        const {cur}=this.state;
         return(
 
             <div classname="array-container">
+            <br/>
             <div
               id="arraySize"
               class="arraySize"
@@ -270,17 +273,20 @@ class SortingVisualizer extends Component{
 
                 <br/>
                 <br/>
-<button onClick={()=> this.genrateArray()}> Generate New Array </button>
+                <button className="buttonnewarray" onClick={()=> this.genrateArray()}> Generate New Array </button>
                 <button className="button" onClick={()=> this.mergeSrt()}> Merge Sort</button>
-                <button onClick={()=> this.quickSort()}> Quick Sort</button>
-                <button onClick={()=> this.heapSortAnimations()}> Heap Sort </button>
-                <button onClick={()=> this.insertSort()}> Insertion Sort </button>
-                <button onClick={()=> this.bubbleSort()}> Bubble Sort </button>
-                <button onClick={()=> this.resetArray()}> Reset </button>
+                <button className="button" onClick={()=> this.quickSort()}> Quick Sort</button>
+                <button className="button" onClick={()=> this.heapSortAnimations()}> Heap Sort </button>
+                <button className="button" onClick={()=> this.insertSort()}> Insertion Sort </button>
+                <button className="button" onClick={()=> this.bubbleSort()}> Bubble Sort </button>
+                <button className="reset" onClick={()=> this.resetArray()}> Reset </button>
+
+
+
 
 
 <br/>
-<br/>
+
 <br/>
 <div className="test">
             {array.map((value,idx)=>(
